@@ -8,8 +8,11 @@ import Standings from './pages/Standings';
 import Teams from './pages/Teams';
 import Players from './pages/Players';
 import Results from './pages/Results';
+import { PlayerInfo } from './pages/PlayerInfo';
+import { TeamInfo } from './pages/TeamInfo';
 
 function App() {
+
   return (
     <div className="App">
       <header className="App-header">
@@ -35,24 +38,10 @@ function App() {
               <Route path="/players" element={<Players />} />
               <Route path="/about" element={<About />} />
 
-              {/* Schedule date routes */}
+              {/* Children routes */}
               <Route path="/schedule/:gameID" element={<Results />} />
-              {/* <Route path="/schedule/20240630_02" element={<Results />} />
-              <Route path="/schedule/20240630_03" element={<Results />} />
-              <Route path="/schedule/20240721_01" element={<Results />} />
-              <Route path="/schedule/20240721_02" element={<Results />} />
-              <Route path="/schedule/20240721_03" element={<Results />} />
-              <Route path="/schedule/20240721_04" element={<Results />} />
-              <Route path="/schedule/20240728_01" element={<Results />} />
-              <Route path="/schedule/20240728_02" element={<Results />} />
-              <Route path="/schedule/20240728_03" element={<Results />} />
-              <Route path="/schedule/20240728_04" element={<Results />} />
-              <Route path="/schedule/20240811_01" element={<Results />} />
-              <Route path="/schedule/20240811_02" element={<Results />} />
-              <Route path="/schedule/20240811_03" element={<Results />} />
-              <Route path="/schedule/20240811_04" element={<Results />} /> */}
-              {/* End Schedule date routes */}
-
+              <Route path="/players/:playerName" element={<PlayerInfo />} />
+              <Route path="/teams/:teamName" element={<TeamInfo />} />
             </Routes>
         </div>
       </div>

@@ -14,59 +14,75 @@ import Standings from './pages/Standings';
 import Teams from './pages/Teams';
 import Players from './pages/Players';
 import Results from './pages/Results';
+import { PlayerInfo } from './pages/PlayerInfo';
+import { GetUniquePlayerArray } from './components/GetUniquePlayerArray';
+import { GetUniqueGameIDs } from './components/GetUniqueGameIDs';
+import { GetUniqueTeams } from './components/GetUniqueTeams';
+import { TeamInfo } from './pages/TeamInfo';
+
+// Player name formatting tp get first and last name into each entry in array
+const playerArray = GetUniquePlayerArray().map(playerObj =>{
+  return playerObj.firstName + "_" + playerObj.lastName
+});
+
+//map the player and gameID arrays to create all paths for each unique element
+const playerRoutes = playerArray.map(player => ({
+  path: `/players/${player}`,
+  element: <PlayerInfo />
+}));
+
+const gameIDRoutes = GetUniqueGameIDs().map(game => ({
+  path: `/schedule/${game}`,
+  element: <Results />
+}));
+
+const teamRoutes = GetUniqueTeams().map(team => ({
+  path: `/teams/${team}`,
+  element: <TeamInfo />
+}));
+
 
 const router = createBrowserRouter([
   {
     element: <App />,
     path: "/",
-    children: [
+    children: [      
+      { path: "/standings", element: <Standings /> },
+      { path: "/about", element: <About /> },
+      // { path: "/teams", element: <Teams /> },
+      { path: "/", element: <Home /> },
       {
         path: "/schedule",
-        // element: <Schedule />
         element: <Outlet />,
         children: [
           {
             index: true,
             element: <Schedule />
           },
-          // Paths for Game ID Schedule routes
-          { path: "/schedule/20240630_01", element: <Results /> },
-          { path: "/schedule/20240630_02", element: <Results /> },
-          { path: "/schedule/20240630_03", element: <Results /> },
-          { path: "/schedule/20240721_01", element: <Results /> },
-          { path: "/schedule/20240721_02", element: <Results /> },
-          { path: "/schedule/20240721_03", element: <Results /> },
-          { path: "/schedule/20240721_04", element: <Results /> },
-          { path: "/schedule/20240728_01", element: <Results /> },
-          { path: "/schedule/20240728_02", element: <Results /> },
-          { path: "/schedule/20240728_03", element: <Results /> },
-          { path: "/schedule/20240728_04", element: <Results /> },
-          { path: "/schedule/20240811_01", element: <Results /> },
-          { path: "/schedule/20240811_02", element: <Results /> },
-          { path: "/schedule/20240811_03", element: <Results /> },
-          { path: "/schedule/20240811_04", element: <Results /> },
-          // End Game ID Schedule routes
+          ...gameIDRoutes //routes for each game ID based on the variable above
         ]
       },
       {
-        path: "/standings",
-        element: <Standings />,
-      },
-      {
-        path: "/about",
-        element: <About />,
+        path: "/players",
+        element: <Outlet />,
+        children: [
+          {
+            index: true,
+            element: <Players />
+          },
+          ...playerRoutes //routes for each player name based on the variable above
+        ]
       },
       {
         path: "/teams",
-        element: <Teams />,
-      },
-      {
-        path: "/players",
-        element: <Players />,
-      },
-      {
-        path: "/",
-        element: <Home />,
+        element: <Outlet />,
+        children: [
+          {
+            index: true,
+            element: <Teams />
+          },
+          ...teamRoutes //routes for each team based on the variable above
+        ]
       },
     ],
   },

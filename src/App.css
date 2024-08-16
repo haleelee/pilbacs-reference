@@ -41,6 +41,8 @@
 ul {
   list-style-type: none;
   padding: 0;
+  font-family: sans-serif;
+
 }
 
 .menu nav {
@@ -73,4 +75,41 @@ ul {
   text-decoration: none;
   color: #fff;
   display: block;
+}
+
+.results_teamScorePage{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.list_of_players{
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column; 
+  list-style-type: none;
+  flex-flow: column wrap;
+  height: 50%;
+  /* justify-content: space-evenly;
+  flex-wrap: wrap; */
+}
+
+.container_list_of_players{
+  height: 50em;
+
+}
+
+.list_of_players li {
+  width: 33%;
+}
+
+.list_of_teams{
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column; 
+  list-style-type: none;
+  flex-flow: column wrap;
+  height: 50%;
+  /* justify-content: space-evenly;
+  flex-wrap: wrap; */
 }
