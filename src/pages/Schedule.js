@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import DATA from '../components/season15stats.json'
 import { GetUniqueGameIDs } from '../components/GetUniqueGameIDs';
 import { GetBoxScoreArray } from '../components/GetBoxScoreArray';
+import {format} from 'date-fns';
 
 const Schedule = () => {
   // Initiate the gamesArray, which contains all the unique game ids. Then we set the values of the array to each unique game id.
@@ -16,9 +17,13 @@ const Schedule = () => {
         [...Array(boxScoreArray.length).keys()].map(n => {
             return <li key={n}>
                     <Link to={`/schedule/${boxScoreArray[n].gameId}`}>
-                      {boxScoreArray[n].gameDate + " | " + boxScoreArray[n].gameTime + " | " + boxScoreArray[n].team1Name + " vs. " + boxScoreArray[n].team2Name}
+                      {format(new Date(boxScoreArray[n].gameDate), "MMMM dd, yyyy") + " | " + boxScoreArray[n].gameTime + " | " + boxScoreArray[n].team1Name + " vs. " + boxScoreArray[n].team2Name}
+                      <br></br>
+
                     </Link>
+                    <br></br>
                   </li>;
+                  
         })
       }
     </ul>
@@ -26,7 +31,7 @@ const Schedule = () => {
   );
 };
 
-
+// format(new Date(boxScoreArray[n].gameDate), "MMMM dd, yyyy")
 
 // const Schedule = () => {
 //   return (

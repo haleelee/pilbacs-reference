@@ -41,8 +41,17 @@ const Results = () => {
   return (
   <div>
     {/* Team Names */}
-    <h2>{getUniqueValues(filteredGameResults, "teamName")[0] + " vs. " + getUniqueValues(filteredGameResults, "teamName")[1]}</h2> 
-    <h2>{awayTotalPoints + "             " + homeTotalPoints}</h2>
+    <div class="results_teamScorePage">
+      <div>
+        <h2>{getUniqueValues(filteredGameResults, "teamName")[0]}</h2>
+        <h2>{awayTotalPoints}</h2>
+      </div>
+      <div>
+        <h2>{getUniqueValues(filteredGameResults, "teamName")[1]}</h2>
+        <h2>{homeTotalPoints}</h2>
+      </div>
+    </div>
+
     {/* Date */}
     <p>{formatTime(filteredGameResults[0].time) + " | " + format(new Date(filteredGameResults[0].gameDate), "MMMM dd, yyyy")}</p>
     <p>Court {filteredGameResults[0].court}</p>
